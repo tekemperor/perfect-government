@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-PerfectGovernment::Application.config.secret_token = 'e48f29abe445b95c1246fa321829112a5ef4991e45bd5742f0149d1fbee599ee3e3b1fb34776cbe699b493ec71b0553cd0cba74759d773e943160def141ab3ba'
+PerfectGovernment::Application.config.secret_token = '066e3b56613142bcafa686200312ce32a94fa161757d71024261529f203e64193207db86fa3c7c85392666df4090846ffe863f591e47a33dc8de2f22dfb689d6'

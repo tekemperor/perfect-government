@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218022423) do
+ActiveRecord::Schema.define(:version => 20120218033632) do
 
   create_table "users", :force => true do |t|
     t.string   "crypted_password",          :limit => 40
