@@ -3,3 +3,10 @@ rvm:
   - 1.8.7
   - 1.9.2
   - 1.9.3
+
+before-script:
+  - rake db:migrate
+  - rake db:test:prepare
+
+script:
+  - rspec
