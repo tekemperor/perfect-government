@@ -28,4 +28,14 @@ PerfectGovernment::Application.routes.draw do
   get 'logout(.:format)' => 'users#logout', :as => 'user_logout'
   match 'forgot_password(.:format)' => 'users#forgot_password', :as => 'user_forgot_password'
 
+
+  # Resource routes for controller "ideas"
+  get 'ideas(.:format)' => 'ideas#index', :as => 'ideas'
+  get 'ideas/new(.:format)', :as => 'new_idea'
+  get 'ideas/:id/edit(.:format)' => 'ideas#edit', :as => 'edit_idea'
+  get 'ideas/:id(.:format)' => 'ideas#show', :as => 'idea', :constraints => { :id => %r([^/.?]+) }
+  post 'ideas(.:format)' => 'ideas#create', :as => 'create_idea'
+  put 'ideas/:id(.:format)' => 'ideas#update', :as => 'update_idea', :constraints => { :id => %r([^/.?]+) }
+  delete 'ideas/:id(.:format)' => 'ideas#destroy', :as => 'destroy_idea', :constraints => { :id => %r([^/.?]+) }
+
 end

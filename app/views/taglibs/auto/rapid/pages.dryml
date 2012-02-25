@@ -5,8 +5,130 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Idea"><ht key="idea.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
+
+
+
+
+<!-- ====== Idea Pages ====== -->
+
+<def tag="index-page" for="Idea">
+  <page merge title="#{ht 'idea.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page idea" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="idea.index.heading">
+            <model-name-human model="&model"/>
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="idea.collection.count" count="&collection_count">
+            <count summary/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="idea.actions.new">New Idea</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Idea">
+  <page merge title="#{ht 'idea.new.title', :default=>[' New Idea'] }">
+    <body: class="new-page idea" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="idea.new.heading">
+            New Idea
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'idea.actions.create', :default=>['Create Idea']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Idea">
+  <page merge title="#{ht 'idea.show.title', :default=>['Idea'], :name => name(:no_wrapper => true) }">
+
+    <body: class="show-page idea" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="idea.show.heading" name="#{name(:no_wrapper => true)}">
+                Idea <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="idea.actions.edit" name="#{name(:no_wrapper => true)}">
+                Edit Idea
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+            <view:content param="description" />
+            <field-list fields="user" param/>
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Idea">
+  <page merge title="#{ht 'idea.edit.title', :default=>['Edit Idea'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page idea" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="idea.edit.heading" name="#{name(:no_wrapper => true)}">
+            Edit Idea
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'idea.actions.delete', :default=>['Remove This Idea']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
 
 
 
@@ -101,6 +223,15 @@
 
           <section param="content-body">
             <field-list fields="email_address, state" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">
+                <ht key="idea.collection.heading" count="&this.ideas.count" >
+                  <human-collection-name collection="ideas" your/>
+                </ht>
+              </h3>
+
+              <collection:ideas param/>
+            </section>
           </section>
     </content:>
 
