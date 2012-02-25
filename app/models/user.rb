@@ -18,6 +18,14 @@ class User < ActiveRecord::Base
     end
   end
 
+	validates :email_address, :format => {:without => /\A[+_.-]/ }
+	validates :email_address, :format => {:without => /[+_.-]\Z/ }
+	validates :email_address, :format => {:without => /[+_.-]@/ }
+	validates :email_address, :format => {:without => /@[+_.-]/ }
+	validates :email_address, :format => {:without => /[+_.-]\./ }
+	validates :email_address, :format => {:without => /\.[+_.-]/ }
+	validates :email_address, :format => {:without => /,/ }
+
 
   # --- Signup lifecycle --- #
 

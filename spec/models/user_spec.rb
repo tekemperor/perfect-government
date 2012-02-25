@@ -53,6 +53,77 @@ describe User do
 
 	end
 
+	describe "email validation" do
+
+		it "should reject duplicate emails" do
+			User.create!(@valid)
+			User.new(@distinct.merge(:email_address => @valid[:email_address])).
+				should_not be_valid
+		end
+
+		describe "should accept" do
+
+			name_mods = %w[-dash .dot _score 1num +plus]
+			dom_mods = %w[-dash .dot 1num]
+			tlds = %w[net com org biz info cc ru co.uk]
+
+			emails = ["plain@jane.com"]
+
+			name_mods.each do |mod|
+				emails << "test#{mod}@domain.tld"
+			end
+
+			dom_mods.each do |mod|
+				emails << "name@test#{mod}.tld"
+			end
+
+			tlds.each do |tld|
+				emails << "name@domain.#{tld}"
+			end
+
+			emails.each do |email|
+
+				it "'#{email}'" do
+					u = User.new(@valid.merge(:email_address => email))
+					u.should be_valid
+				end
+
+			end
+
+		end
+
+		describe "should reject" do
+
+			name_mods = %w[- . _ + any,comma]
+			dom_mods = %w[- . _ + #]
+
+			emails = ["plain@no-tld"]
+
+			name_mods.each do |mod|
+				emails << "#{mod}prefix@domain.tld"
+				emails << "suffix#{mod}@domain.tld"
+			end
+
+			dom_mods.each do |mod|
+				emails << "name@#{mod}prefix.tld"
+				emails << "name@suffix#{mod}.tld"
+				emails << "name@suffix.#{mod}tld"
+				emails << "name@suffix.tld#{mod}"
+			end
+
+			emails.each do |email|
+
+				it "'#{email}'" do
+					u = User.new(@valid.merge(:email_address => email))
+					u.should_not be_valid
+				end
+
+			end
+
+		end
+
+	end
+
 	describe "defaults" do
 
 		before :each do
