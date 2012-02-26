@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Idea do
 
-	describe "user validation" do
+	describe "blah" do
 
-		it "should require a user" do
-			Idea.new(:content => "Test content").should_not be_valid
+		it "blah" do
+			Idea.new.should respond_to? :content
 		end
 
 	end

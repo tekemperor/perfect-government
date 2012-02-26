@@ -97,8 +97,6 @@
           </header>
 
           <section param="content-body">
-            <view:content param="description" />
-            <field-list fields="user" param/>
           </section>
     </content:>
 
@@ -332,5 +330,3 @@
 
   </page>
 </def>
-
-

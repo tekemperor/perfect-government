@@ -3,13 +3,8 @@ class Idea < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
 	fields do
-		content :text, :required
-		user_id :integer, :required
-
 		timestamps
 	end
-
-	belongs_to :user
 
   # --- Permissions --- #
 
