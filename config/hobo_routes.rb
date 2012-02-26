@@ -14,6 +14,8 @@ PerfectGovernment::Application.routes.draw do
   get 'users/:id/reset_password(.:format)' => 'users#reset_password', :as => 'user_reset_password'
 
   # Resource routes for controller "users"
+  get 'users(.:format)' => 'users#index', :as => 'users'
+  get 'users/new(.:format)', :as => 'new_user'
   get 'users/:id/edit(.:format)' => 'users#edit', :as => 'edit_user'
   get 'users/:id(.:format)' => 'users#show', :as => 'user', :constraints => { :id => %r([^/.?]+) }
   post 'users(.:format)' => 'users#create', :as => 'create_user'
