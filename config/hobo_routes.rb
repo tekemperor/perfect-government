@@ -33,9 +33,11 @@ PerfectGovernment::Application.routes.draw do
   get 'ideas(.:format)' => 'ideas#index', :as => 'ideas'
   get 'ideas/new(.:format)', :as => 'new_idea'
   get 'ideas/:id/edit(.:format)' => 'ideas#edit', :as => 'edit_idea'
-  get 'ideas/:id(.:format)' => 'ideas#show', :as => 'idea', :constraints => { :id => %r([^/.?]+) }
   post 'ideas(.:format)' => 'ideas#create', :as => 'create_idea'
   put 'ideas/:id(.:format)' => 'ideas#update', :as => 'update_idea', :constraints => { :id => %r([^/.?]+) }
   delete 'ideas/:id(.:format)' => 'ideas#destroy', :as => 'destroy_idea', :constraints => { :id => %r([^/.?]+) }
+
+  # Owner routes for controller "ideas"
+  post 'users/:user_id/ideas(.:format)' => 'ideas#create_for_user', :as => 'create_idea_for_user'
 
 end

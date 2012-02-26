@@ -81,6 +81,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:user param="parent-link">&laquo; <ht key="idea.actions.back_to_parent" parent="User" name="&this">Back to <name/></ht></a:user>
             <h2 param="heading">
               <ht key="idea.show.heading" name="#{name(:no_wrapper => true)}">
                 Idea <name/>
@@ -88,6 +89,8 @@
             </h2>
 
             <record-flags fields="" param/>
+
+            <a:user param="creator-link"/>
 
             <a action="edit" if="&can_edit?" param="edit-link">
               <ht key="idea.actions.edit" name="#{name(:no_wrapper => true)}">
@@ -97,6 +100,7 @@
           </header>
 
           <section param="content-body">
+            <view:content param="description" />
           </section>
     </content:>
 
@@ -126,6 +130,9 @@
 
   </page>
 </def>
+
+
+
 
 
 
@@ -229,6 +236,18 @@
               </h3>
 
               <collection:ideas param/>
+
+              <section param="add-to-collection" if="&can_create?(@user.ideas)">
+                <h3 param="add-form-heading">
+                  <ht key="idea.collection.add_form_heading" count="1">
+                    Add an Idea
+                  </ht>
+                </h3>
+                <form with="&@idea || new_for_current_user(@user.ideas)" owner="user" without-cancel param>
+                  <field-list: skip="user"/>
+                  <submit: label="#{ht 'idea.actions.add', :default=>['Add'] }"/>
+                </form>
+              </section>
             </section>
           </section>
     </content:>
@@ -330,3 +349,5 @@
 
   </page>
 </def>
+
+

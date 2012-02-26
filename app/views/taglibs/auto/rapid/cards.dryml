@@ -3,8 +3,17 @@
 <def tag="card" for="Idea">
   <card class="idea" param="default" merge>
     <header: param>
-      <h4 param="heading"><a><name/></a></h4>
+      <h4 param="heading"><name/></h4>
+      <div param="actions">
+        <a action="edit" if="&can_edit?" param="edit-link">
+          <ht key="idea.actions.edit">Edit</ht>
+        </a>
+      </div>
     </header:>
+    <body: param>
+      <view:content param="description"/>
+      <a:user param="creator-link"/>
+    </body:>
   </card>
 </def>
 
