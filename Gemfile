@@ -1,14 +1,22 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.11'
+gem 'hobo', '1.3.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :development, :test do
-	gem 'sqlite3'
+group :development do
+	gem 'guard-rspec'
+	gem 'guard-spork'
 	gem 'heroku'
 	gem 'travis-lint'
+end
+
+group :development, :test do
+	gem 'sqlite3'
+	gem 'rspec-rails'
+	gem 'spork-rails'
 end
 
 group :production do
@@ -37,5 +45,3 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem "hobo", "= 1.3.0"
-gem "rspec-rails", ">= 2.5.0", :group => [:test, :development]
