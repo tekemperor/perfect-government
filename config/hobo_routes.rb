@@ -5,6 +5,18 @@
 PerfectGovernment::Application.routes.draw do
 
 
+  # Resource routes for controller "ideas"
+  get 'ideas(.:format)' => 'ideas#index', :as => 'ideas'
+  get 'ideas/new(.:format)', :as => 'new_idea'
+  get 'ideas/:id/edit(.:format)' => 'ideas#edit', :as => 'edit_idea'
+  post 'ideas(.:format)' => 'ideas#create', :as => 'create_idea'
+  put 'ideas/:id(.:format)' => 'ideas#update', :as => 'update_idea', :constraints => { :id => %r([^/.?]+) }
+  delete 'ideas/:id(.:format)' => 'ideas#destroy', :as => 'destroy_idea', :constraints => { :id => %r([^/.?]+) }
+
+  # Owner routes for controller "ideas"
+  post 'users/:user_id/ideas(.:format)' => 'ideas#create_for_user', :as => 'create_idea_for_user'
+
+
   # Lifecycle routes for controller "users"
   post 'users/signup(.:format)' => 'users#do_signup', :as => 'do_user_signup'
   get 'users/signup(.:format)' => 'users#signup', :as => 'user_signup'
@@ -29,17 +41,5 @@ PerfectGovernment::Application.routes.draw do
   match 'login(.:format)' => 'users#login', :as => 'user_login'
   get 'logout(.:format)' => 'users#logout', :as => 'user_logout'
   match 'forgot_password(.:format)' => 'users#forgot_password', :as => 'user_forgot_password'
-
-
-  # Resource routes for controller "ideas"
-  get 'ideas(.:format)' => 'ideas#index', :as => 'ideas'
-  get 'ideas/new(.:format)', :as => 'new_idea'
-  get 'ideas/:id/edit(.:format)' => 'ideas#edit', :as => 'edit_idea'
-  post 'ideas(.:format)' => 'ideas#create', :as => 'create_idea'
-  put 'ideas/:id(.:format)' => 'ideas#update', :as => 'update_idea', :constraints => { :id => %r([^/.?]+) }
-  delete 'ideas/:id(.:format)' => 'ideas#destroy', :as => 'destroy_idea', :constraints => { :id => %r([^/.?]+) }
-
-  # Owner routes for controller "ideas"
-  post 'users/:user_id/ideas(.:format)' => 'ideas#create_for_user', :as => 'create_idea_for_user'
 
 end
